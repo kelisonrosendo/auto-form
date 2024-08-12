@@ -3,7 +3,7 @@
     <v-row>
       <v-col
         v-for="field in formFields"
-        :cols="field.cols"
+        :cols="field.cols || 12"
         :key="field.fieldName"
       >
         <auto-form-content

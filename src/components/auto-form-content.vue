@@ -21,12 +21,16 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits(["update:model-value"]);
 
-const { value: inputValue, setValue } = useField(props.field.fieldName);
+const {
+  value: inputValue,
+  setValue,
+  resetField,
+} = useField(props.field.fieldName);
 
 watch(
   () => props.field.value,
   () => {
-    if (props.field.value) setValue(props.field.value);
+    props.field.value ? setValue(props.field.value) : resetField();
   },
   { immediate: true }
 );

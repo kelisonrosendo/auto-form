@@ -23,7 +23,6 @@ const formConfig: FormConfig[] = [
     fieldProps: {
       label: "Usuário",
       placeholder: "Insira o usuário",
-      required: true,
     },
     cols: 6,
     schema: z
@@ -41,7 +40,6 @@ const formConfig: FormConfig[] = [
       type: "password",
       label: "Senha",
       placeholder: "Insira sua senha",
-      required: true,
     },
     cols: 6,
     schema: z
@@ -49,6 +47,35 @@ const formConfig: FormConfig[] = [
         required_error: "A senha é obrigatória",
       })
       .min(8, { message: "A senha deve conter 8 caracteres" }),
+  },
+  {
+    fieldName: "email",
+    fieldType: "input",
+    fieldProps: {
+      type: "email",
+      label: "E-mail",
+      placeholder: "Insira seu e-mail",
+    },
+    schema: z.string().email({ message: "E-mail inválido" }).optional(),
+  },
+  {
+    fieldName: "number",
+    fieldType: "input",
+    fieldProps: {
+      type: "number",
+      label: "Número",
+      placeholder: "Insira um número",
+    },
+    schema: z.coerce.number({ message: "Somente números" }),
+  },
+  {
+    fieldName: "textarea",
+    fieldType: "textarea",
+    fieldProps: {
+      label: "Textarea",
+      placeholder: "Insira um textão",
+    },
+    schema: z.string().optional(),
   },
 ];
 

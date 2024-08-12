@@ -8,10 +8,9 @@ export type FormConfig = {
     label?: string;
     type?: string;
     placeholder?: string;
-    required?: boolean;
   };
   value?: any;
-  cols: number;
+  cols?: number;
   schema: z.ZodSchema;
 };
 
