@@ -15,7 +15,11 @@
       </v-col>
     </v-row>
 
-    <auto-form-submit></auto-form-submit>
+    <v-row>
+      <v-col>
+        <auto-form-submit @submit="onSubmit" @reset="onReset" />
+      </v-col>
+    </v-row>
   </v-form>
 </template>
 
@@ -39,7 +43,7 @@ const emit = defineEmits(["update:form-value"]);
 const formFields = ref();
 const { initFieldsValue, createZodSchema, handleFieldValue } = useAutoForm();
 
-const { handleSubmit, errors } = useForm({
+const { handleSubmit, resetForm, errors } = useForm({
   validationSchema: toTypedSchema(createZodSchema(props.formConfig)),
 });
 
@@ -55,6 +59,11 @@ const onChange = (field: FormConfig, event: FormConfig["value"]) => {
   const newValue = handleFieldValue(field.fieldName, event, props.formValue);
 
   emit("update:form-value", newValue);
+};
+
+const onReset = () => {
+  resetForm();
+  emit("update:form-value", {});
 };
 
 const onSubmit = handleSubmit((values) => {
