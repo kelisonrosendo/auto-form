@@ -20,8 +20,19 @@ export const useAutoForm = () => {
     return z.object(schemaObject);
   }
 
+  function handleFieldValue(
+    fieldName: string,
+    newValue: FormConfig["value"],
+    formValue: FormValue<FormConfig[]>
+  ) {
+    const newValueMap = { ...formValue, [fieldName]: newValue };
+
+    return newValueMap;
+  }
+
   return {
     initFieldsValue,
     createZodSchema,
+    handleFieldValue,
   };
 };

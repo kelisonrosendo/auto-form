@@ -10,6 +10,7 @@
           :field="field"
           :model-value="field.value"
           :error-messages="errors[field.fieldName]"
+          @update:model-value="onChange(field, $event)"
         />
       </v-col>
     </v-row>
@@ -33,12 +34,12 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits(["update-form-value"]);
+const emit = defineEmits(["update:form-value"]);
 
 const formFields = ref();
-const { initFieldsValue, createZodSchema } = useAutoForm();
+const { initFieldsValue, createZodSchema, handleFieldValue } = useAutoForm();
 
-const { handleSubmit, resetForm, errors } = useForm({
+const { handleSubmit, errors } = useForm({
   validationSchema: toTypedSchema(createZodSchema(props.formConfig)),
 });
 
@@ -49,6 +50,12 @@ watch(
   },
   { immediate: true }
 );
+
+const onChange = (field: FormConfig, event: FormConfig["value"]) => {
+  const newValue = handleFieldValue(field.fieldName, event, props.formValue);
+
+  emit("update:form-value", newValue);
+};
 
 const onSubmit = handleSubmit((values) => {
   console.log(values);

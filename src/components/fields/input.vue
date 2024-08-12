@@ -1,5 +1,9 @@
 <template>
-  <v-text-field></v-text-field>
+  <v-text-field persistent-placeholder />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "AutoFormInput",
+});
+</script>

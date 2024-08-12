@@ -1,8 +1,17 @@
 <template>
-  <auto-form v-bind="{ formConfig, formValue }"> App </auto-form>
+  <div>
+    {{ formValue }}
+    <auto-form
+      v-bind="{ formConfig, formValue }"
+      @update:form-value="updateFormValue"
+    >
+      App
+    </auto-form>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { z } from "zod";
 import AutoForm from "./components/auto-form.vue";
 import { FormConfig, FormValue } from "./components/types";
@@ -43,7 +52,11 @@ const formConfig: FormConfig[] = [
   },
 ];
 
-const formValue: FormValue<FormConfig[]> = {};
+const formValue = ref<FormValue<FormConfig[]>>({});
+
+const updateFormValue = (newValue: FormValue<FormConfig[]>) => {
+  formValue.value = newValue;
+};
 </script>
 
 <style>
