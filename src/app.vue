@@ -97,6 +97,7 @@ const formConfig: FormConfig[] = [
         },
       ],
     },
+    cols: 6,
     schema: z.object({
       id: z.union([z.string(), z.number()]),
       title: z.string(),
@@ -129,6 +130,7 @@ const formConfig: FormConfig[] = [
         },
       ],
     },
+    cols: 6,
     schema: z
       .array(
         z.object({
@@ -139,6 +141,51 @@ const formConfig: FormConfig[] = [
         { message: "Selecione pelo menos uma opção" }
       )
       .min(1, { message: "Selecione pelo menos uma opção" }),
+  },
+  {
+    fieldName: "radio",
+    fieldType: "radio",
+    fieldProps: {
+      label: "Radio group",
+      items: [
+        {
+          label: "Item 1",
+          value: "1",
+        },
+        {
+          label: "Item 2",
+          value: 2,
+        },
+      ],
+    },
+    cols: 6,
+    schema: z.union([
+      z.string({ required_error: "Escolha uma opção" }),
+      z.number({ required_error: "Escolha uma opção" }),
+    ]),
+  },
+  {
+    fieldName: "checkbox",
+    fieldType: "checkbox",
+    fieldProps: {
+      label: "Checkbox group",
+      items: [
+        {
+          label: "Item 1",
+          value: "1",
+        },
+        {
+          label: "Item 2",
+          value: 2,
+        },
+      ],
+    },
+    cols: 6,
+    schema: z
+      .array(z.union([z.string(), z.number()]), {
+        required_error: "Selecione ao menos uma opção",
+      })
+      .min(1, { message: "Selecione ao menos uma opção" }),
   },
 ];
 

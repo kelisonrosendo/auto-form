@@ -1,9 +1,19 @@
 import { z } from "zod";
 import { FORM_COMPONENTS } from "./config";
 
-type SelectItemProps = {
+export type SelectItemProps = {
   id: string | number;
   title: string;
+  value: string | number;
+};
+
+export type RadioItemProps = {
+  label: string;
+  value: string | number;
+};
+
+export type CheckboxItemProps = {
+  label: string;
   value: string | number;
 };
 
@@ -15,7 +25,7 @@ export type FormConfig = {
     type?: string;
     placeholder?: string;
     rows?: number;
-    items?: SelectItemProps[];
+    items?: SelectItemProps[] | RadioItemProps[] | CheckboxItemProps[];
     returnObject?: boolean;
     multiple?: boolean;
   };
