@@ -74,8 +74,71 @@ const formConfig: FormConfig[] = [
     fieldProps: {
       label: "Textarea",
       placeholder: "Insira um textão",
+      rows: 4,
     },
     schema: z.string().optional(),
+  },
+  {
+    fieldName: "select",
+    fieldType: "select",
+    fieldProps: {
+      label: "Select simples",
+      placeholder: "Selecione uma opção",
+      items: [
+        {
+          id: 1,
+          title: "Item 1",
+          value: "1",
+        },
+        {
+          id: 2,
+          title: "Item 2",
+          value: 2,
+        },
+      ],
+    },
+    schema: z.object({
+      id: z.union([z.string(), z.number()]),
+      title: z.string(),
+      value: z.union([
+        z.string({
+          required_error: "Selecione uma opção",
+        }),
+        z.number({ required_error: "Selecione uma opção" }),
+      ]),
+    }),
+  },
+  {
+    fieldName: "selectMultiple",
+    fieldType: "select",
+    fieldProps: {
+      label: "Select múltiplo",
+      placeholder: "Selecione uma ou mais opções",
+      multiple: true,
+      returnObject: true,
+      items: [
+        {
+          id: 1,
+          title: "Item 1",
+          value: "1",
+        },
+        {
+          id: 2,
+          title: "Item 2",
+          value: 2,
+        },
+      ],
+    },
+    schema: z
+      .array(
+        z.object({
+          id: z.union([z.string(), z.number()]),
+          title: z.string(),
+          value: z.union([z.string(), z.number()]),
+        }),
+        { message: "Selecione pelo menos uma opção" }
+      )
+      .min(1, { message: "Selecione pelo menos uma opção" }),
   },
 ];
 

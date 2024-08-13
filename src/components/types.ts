@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { FORM_COMPONENTS } from "./config";
 
+type SelectItemProps = {
+  id: string | number;
+  title: string;
+  value: string | number;
+};
+
 export type FormConfig = {
   fieldName: string;
   fieldType: keyof typeof FORM_COMPONENTS;
@@ -8,6 +14,10 @@ export type FormConfig = {
     label?: string;
     type?: string;
     placeholder?: string;
+    rows?: number;
+    items?: SelectItemProps[];
+    returnObject?: boolean;
+    multiple?: boolean;
   };
   value?: any;
   cols?: number;
