@@ -23,6 +23,7 @@ const formConfig: FormConfig[] = [
     fieldProps: {
       label: "Usuário",
       placeholder: "Insira o usuário",
+      mask: "(##) #####-####",
     },
     cols: 6,
     schema: z
@@ -164,29 +165,29 @@ const formConfig: FormConfig[] = [
       z.number({ required_error: "Escolha uma opção" }),
     ]),
   },
-  {
-    fieldName: "checkbox",
-    fieldType: "checkbox",
-    fieldProps: {
-      label: "Checkbox group",
-      items: [
-        {
-          label: "Item 1",
-          value: "1",
-        },
-        {
-          label: "Item 2",
-          value: 2,
-        },
-      ],
-    },
-    cols: 6,
-    schema: z
-      .array(z.union([z.string(), z.number()]), {
-        required_error: "Selecione ao menos uma opção",
-      })
-      .min(1, { message: "Selecione ao menos uma opção" }),
-  },
+  // {
+  //   fieldName: "checkbox",
+  //   fieldType: "checkbox",
+  //   fieldProps: {
+  //     label: "Checkbox group",
+  //     items: [
+  //       {
+  //         label: "Item 1",
+  //         value: "1",
+  //       },
+  //       {
+  //         label: "Item 2",
+  //         value: 2,
+  //       },
+  //     ],
+  //   },
+  //   cols: 6,
+  //   schema: z
+  //     .array(z.union([z.string(), z.number()]), {
+  //       required_error: "Selecione ao menos uma opção",
+  //     })
+  //     .min(1, { message: "Selecione ao menos uma opção" }),
+  // },
   {
     fieldName: "datePicker",
     fieldType: "datePicker",

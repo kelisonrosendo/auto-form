@@ -17,18 +17,21 @@ export type CheckboxItemProps = {
   value: string | number;
 };
 
+export type FieldProps = {
+  label?: string;
+  type?: string;
+  placeholder?: string;
+  rows?: number;
+  items?: SelectItemProps[] | RadioItemProps[] | CheckboxItemProps[];
+  returnObject?: boolean;
+  multiple?: boolean;
+  mask?: string;
+};
+
 export type FormConfig = {
   fieldName: string;
   fieldType: keyof typeof FORM_COMPONENTS;
-  fieldProps?: {
-    label?: string;
-    type?: string;
-    placeholder?: string;
-    rows?: number;
-    items?: SelectItemProps[] | RadioItemProps[] | CheckboxItemProps[];
-    returnObject?: boolean;
-    multiple?: boolean;
-  };
+  fieldProps?: FieldProps;
   value?: any;
   cols?: number;
   schema: z.ZodSchema;
