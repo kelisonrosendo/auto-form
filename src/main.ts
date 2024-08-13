@@ -4,14 +4,23 @@ import { createApp } from "vue";
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
+import { pt } from "vuetify/locale";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
 // Components
 import App from "./app.vue";
+import { VDateInput } from "vuetify/labs/VDateInput";
 
 const vuetify = createVuetify({
-  components,
+  locale: {
+    locale: "pt",
+    messages: { pt },
+  },
+  components: {
+    ...components,
+    VDateInput,
+  },
   directives,
 });
 

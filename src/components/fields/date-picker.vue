@@ -1,9 +1,9 @@
 <template>
-  <v-select persistent-placeholder />
+  <v-date-input></v-date-input>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-  name: "AutoFormSelect",
+  name: "AutoFormDatePicker",
 });
 </script>

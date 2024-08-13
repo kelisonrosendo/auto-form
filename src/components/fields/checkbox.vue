@@ -24,7 +24,7 @@ import { ref, watch } from "vue";
 import { CheckboxItemProps } from "../types";
 
 defineOptions({
-  name: "CheckboxWrapper",
+  name: "AutoFormCheckbox",
 });
 
 interface Props {
@@ -43,7 +43,7 @@ watch(
   () => {
     selectedItems.value = props.inputValue;
   },
-  { immediate: true, deep: true }
+  { immediate: true }
 );
 
 const onCheck = (event: string[] | number[] | unknown) => {

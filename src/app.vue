@@ -187,6 +187,15 @@ const formConfig: FormConfig[] = [
       })
       .min(1, { message: "Selecione ao menos uma opção" }),
   },
+  {
+    fieldName: "datePicker",
+    fieldType: "datePicker",
+    fieldProps: {
+      label: "DatePicker",
+    },
+    cols: 6,
+    schema: z.coerce.date(),
+  },
 ];
 
 const formValue = ref<FormValue<FormConfig[]>>({});
