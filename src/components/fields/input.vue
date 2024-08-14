@@ -1,21 +1,29 @@
 <template>
   <v-text-field
-    v-maska="props.mask"
+    v-maska="fieldMask"
     persistent-placeholder
     variant="outlined"
+    :type="type"
   />
 </template>
 
 <script setup lang="ts">
 import { vMaska } from "maska/vue";
+import { TYPE_MASKS } from "../config";
 
 defineOptions({
   name: "AutoFormInput",
 });
 
 interface Props {
-  mask?: string | undefined;
+  type?: string;
+  mask?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "text",
+  mask: undefined,
+});
+
+const fieldMask = props.mask ?? TYPE_MASKS[props.type];
 </script>

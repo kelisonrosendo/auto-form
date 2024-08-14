@@ -17,6 +17,16 @@ import { FormConfig, FormValue } from "./components/types";
 
 const formConfig: FormConfig[] = [
   {
+    fieldName: "money",
+    fieldType: "input",
+    fieldProps: {
+      type: "money",
+      label: "Money",
+      placeholder: "Insira um dinheiro",
+    },
+    schema: z.string(),
+  },
+  {
     fieldName: "username",
     fieldType: "input",
     fieldProps: {
