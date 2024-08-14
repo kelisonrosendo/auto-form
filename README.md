@@ -51,9 +51,9 @@ Os tipos disponíveis estão configurados no objeto `FORM_COMPONENTS` dentro de 
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { z } from "zod";
 import AutoForm from "./components/auto-form.vue";
 import { FormConfig, FormValue } from "./components/types";
+import { formSchema } from "./components/schema";
 
 // Objeto de configuração para geração do formulário
 const formConfig: FormConfig[] = [
@@ -65,13 +65,7 @@ const formConfig: FormConfig[] = [
       placeholder: "Insira o usuário",
     },
     cols: 6,
-    schema: z
-      .string({
-        required_error: "O usuário é obrigatório",
-      })
-      .min(3, {
-        message: "O usuário deve conter pelo menos 3 caracteres",
-      }),
+    schema: formSchema.shape.string.min(3, { message: "Mínimo 3 caracteres" }),
   },
   {
     fieldName: "email",
@@ -82,13 +76,7 @@ const formConfig: FormConfig[] = [
       placeholder: "Informe o e-mail",
     },
     cols: 6,
-    schema: z
-      .string({
-        required_error: "O e-mail é obrigatório",
-      })
-      .email({
-        message: "E-mail inválido",
-      }),
+    schema: formSchema.shape.email,
   },
 ];
 
@@ -126,7 +114,7 @@ Podemos utilizar máscaras pré-definidas para campos do tipo **money, telefone 
     type: "money", // Saída: #.###,##
     label: "Valor monetário",
   },
-  schema: z.string()
+  schema: formSchema.shape.string
 },
 {
   fieldName: "phone",
@@ -135,7 +123,7 @@ Podemos utilizar máscaras pré-definidas para campos do tipo **money, telefone 
     type: "phone", // Saída: (##) #####-####
     label: "Telefone",
   },
-  schema: z.string()
+  schema: formSchema.shape.string
 },
 {
   fieldName: "cep",
@@ -144,7 +132,7 @@ Podemos utilizar máscaras pré-definidas para campos do tipo **money, telefone 
     type: "cep", // Saída: #####-###
     label: "CEP",
   },
-  schema: z.string()
+  schema: formSchema.shape.string
 }
 ```
 
@@ -160,6 +148,6 @@ Também é possível adicionar a máscara manualmente utilizando a prop `mask` d
     label: "Input data com máscara",
     mask: "##/##/####"
   },
-  schema: z.string()
+  schema: formSchema.shape.string
 }
 ```

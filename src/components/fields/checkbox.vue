@@ -1,7 +1,7 @@
 <template>
   <v-input :error-messages="errorMessages">
     <div class="d-flex flex-column">
-      <v-label class="ml-1"> {{ props.label }} </v-label>
+      <v-label class="ml-1 mb-2"> {{ props.label }} </v-label>
 
       <v-checkbox
         v-for="item in props.items"

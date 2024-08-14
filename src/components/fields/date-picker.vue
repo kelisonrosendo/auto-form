@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-menu :close-on-content-click="false">
+    <v-menu v-model="show" :close-on-content-click="false">
       <template v-slot:activator="{ props: activator }">
         <v-text-field
           v-bind="activator"
@@ -41,6 +41,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits(["update:model-value"]);
 
+const show = ref<boolean>(false);
 const inputDate = ref<string>("");
 const pickerDate = ref<Date>();
 
@@ -64,6 +65,7 @@ watch(
 );
 
 const onUpdateInput = (date: string) => {
+  show.value = false;
   inputDate.value = date;
 
   if (!date.length) {
@@ -81,6 +83,7 @@ const onUpdateInput = (date: string) => {
 };
 
 const onUpdateDatePicker = (date: Date) => {
+  show.value = false;
   pickerDate.value = date;
   inputDate.value = date.toLocaleDateString("pt-br");
 
