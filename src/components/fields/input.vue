@@ -3,6 +3,7 @@
     v-maska="fieldMask"
     persistent-placeholder
     variant="outlined"
+    placeholder="Preencher"
     :type="type"
   />
 </template>

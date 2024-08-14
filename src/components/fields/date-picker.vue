@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { vMaska } from "maska/vue";
 
 defineOptions({
@@ -44,22 +44,31 @@ const emit = defineEmits(["update:model-value"]);
 const inputDate = ref<string>("");
 const pickerDate = ref<Date>();
 
-// watch(
-//   () => props.modelValue,
-//   () => {
-//     pickerDate.value = props.modelValue
-//       ? new Date(props.modelValue)
-//       : undefined;
+onMounted(() => {
+  pickerDate.value = props.modelValue ? new Date(props.modelValue) : undefined;
 
-//     inputDate.value = props.modelValue
-//       ? new Date(props.modelValue).toLocaleDateString("pt-br")
-//       : "";
-//   },
-//   { immediate: true }
-// );
+  inputDate.value =
+    props.modelValue instanceof Date
+      ? new Date(props.modelValue).toLocaleDateString("pt-br")
+      : "";
+});
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!props.modelValue) {
+      pickerDate.value = undefined;
+      inputDate.value = "";
+    }
+  }
+);
 
 const onUpdateInput = (date: string) => {
   inputDate.value = date;
+
+  if (!date.length) {
+    pickerDate.value = undefined;
+  }
 
   if (date.length === 10) {
     const [day, month, year] = date.split("/");

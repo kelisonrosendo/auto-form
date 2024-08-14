@@ -1,5 +1,9 @@
 <template>
-  <v-select persistent-placeholder variant="outlined" />
+  <v-select
+    persistent-placeholder
+    variant="outlined"
+    placeholder="Selecionar"
+  />
 </template>
 
 <script setup lang="ts">
