@@ -1,5 +1,5 @@
 <template>
-  <v-textarea persistent-placeholder />
+  <v-textarea persistent-placeholder variant="outlined" />
 </template>
 
 <script setup lang="ts">

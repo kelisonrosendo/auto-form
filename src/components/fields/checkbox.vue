@@ -31,7 +31,7 @@ interface Props {
   label: string;
   items: CheckboxItemProps[];
   errorMessages: string | undefined;
-  inputValue: unknown;
+  modelValue: unknown;
 }
 
 const props = defineProps<Props>();
@@ -39,9 +39,9 @@ const emit = defineEmits(["update:model-value"]);
 const selectedItems = ref<unknown>([]);
 
 watch(
-  () => props.inputValue,
+  () => props.modelValue,
   () => {
-    selectedItems.value = props.inputValue;
+    selectedItems.value = props.modelValue;
   },
   { immediate: true }
 );

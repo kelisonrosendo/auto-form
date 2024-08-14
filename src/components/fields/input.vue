@@ -1,5 +1,9 @@
 <template>
-  <v-text-field v-maska="props.mask" persistent-placeholder />
+  <v-text-field
+    v-maska="props.mask"
+    persistent-placeholder
+    variant="outlined"
+  />
 </template>
 
 <script setup lang="ts">

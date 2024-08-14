@@ -1,12 +1,11 @@
 <template>
   <div>
-    {{ formValue }}
+    <pre class="mb-4">{{ formValue }}</pre>
+
     <auto-form
       v-bind="{ formConfig, formValue }"
       @update:form-value="updateFormValue"
-    >
-      App
-    </auto-form>
+    />
   </div>
 </template>
 
@@ -99,16 +98,10 @@ const formConfig: FormConfig[] = [
       ],
     },
     cols: 6,
-    schema: z.object({
-      id: z.union([z.string(), z.number()]),
-      title: z.string(),
-      value: z.union([
-        z.string({
-          required_error: "Selecione uma opção",
-        }),
-        z.number({ required_error: "Selecione uma opção" }),
-      ]),
-    }),
+    schema: z.union([
+      z.string({ required_error: "Selecione uma opção" }),
+      z.number(),
+    ]),
   },
   {
     fieldName: "selectMultiple",
@@ -165,29 +158,29 @@ const formConfig: FormConfig[] = [
       z.number({ required_error: "Escolha uma opção" }),
     ]),
   },
-  // {
-  //   fieldName: "checkbox",
-  //   fieldType: "checkbox",
-  //   fieldProps: {
-  //     label: "Checkbox group",
-  //     items: [
-  //       {
-  //         label: "Item 1",
-  //         value: "1",
-  //       },
-  //       {
-  //         label: "Item 2",
-  //         value: 2,
-  //       },
-  //     ],
-  //   },
-  //   cols: 6,
-  //   schema: z
-  //     .array(z.union([z.string(), z.number()]), {
-  //       required_error: "Selecione ao menos uma opção",
-  //     })
-  //     .min(1, { message: "Selecione ao menos uma opção" }),
-  // },
+  {
+    fieldName: "checkbox",
+    fieldType: "checkbox",
+    fieldProps: {
+      label: "Checkbox group",
+      items: [
+        {
+          label: "Item 1",
+          value: "1",
+        },
+        {
+          label: "Item 2",
+          value: 2,
+        },
+      ],
+    },
+    cols: 6,
+    schema: z
+      .array(z.union([z.string(), z.number()]), {
+        required_error: "Selecione ao menos uma opção",
+      })
+      .min(1, { message: "Selecione ao menos uma opção" }),
+  },
   {
     fieldName: "datePicker",
     fieldType: "datePicker",
@@ -195,7 +188,10 @@ const formConfig: FormConfig[] = [
       label: "DatePicker",
     },
     cols: 6,
-    schema: z.coerce.date(),
+    schema: z.date({
+      required_error: "A data é obrigatória",
+      invalid_type_error: "Data inválida",
+    }),
   },
 ];
 
